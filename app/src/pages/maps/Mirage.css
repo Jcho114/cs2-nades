@@ -5,6 +5,11 @@
   align-items: center;
 }
 
+.map {
+  height: 55rem;
+  width: 55rem;
+}
+
 .mirage img {
   width: 50rem;
   height: 50rem;

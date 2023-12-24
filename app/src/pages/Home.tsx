@@ -1,18 +1,12 @@
 import './Home.css'
-import flash from "../assets/csgo_flash.webp"
-import nade from "../assets/csgo_nade.webp"
-import smoke from "../assets/csgo_smoke.webp"
-import mirage from "../assets/mirage.jpg"
-import inferno from "../assets/inferno.jpg"
-import overpass from "../assets/overpass.jpg"
 import { NavLink as Link } from 'react-router-dom'
 
 function Header() {
   return (
     <div className="header">
-      <img src={flash} alt="flash" />
-      <img src={nade} alt="nade" />
-      <img src={smoke} alt="smoke" />
+      <img src="../../assets/csgo_flash.webp" alt="flash" />
+      <img src="../../assets/csgo_nade.webp" alt="nade" />
+      <img src="../../assets/csgo_smoke.webp" alt="smoke" />
       <>
         <h1>CS Nades</h1>
         <p>Interactive database for Counter-Strike nades</p>
@@ -34,7 +28,7 @@ function Maps() {
         <ul>
           <figure>
             <Link to="/maps/mirage">
-              <img src={mirage} alt="mirage" />
+              <img src="../../assets/mirage.jpg" alt="mirage" />
             </Link>
             <figcaption>
               <Link to="/maps/mirage">Mirage</Link>
@@ -42,7 +36,7 @@ function Maps() {
           </figure>
           <figure>
             <Link to="/maps/inferno">
-              <img src={inferno} alt="inferno" />
+              <img src="../../assets/inferno.jpg" alt="inferno" />
             </Link>
             <figcaption>
               <Link to="/maps/inferno">Inferno</Link>
@@ -50,7 +44,7 @@ function Maps() {
           </figure>
           <figure>
             <Link to="/maps/overpass">
-              <img src={overpass} alt="overpass" />
+              <img src="../../assets/overpass.jpg" alt="overpass" />
             </Link>
             <figcaption>
               <Link to="/maps/overpass">Overpass</Link>
