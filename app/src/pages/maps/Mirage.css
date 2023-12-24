@@ -1,0 +1,11 @@
+.mirage {
+  margin-top: calc(var(--navbar-height) - 5rem);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.mirage img {
+  width: 50rem;
+  height: 50rem;
+}

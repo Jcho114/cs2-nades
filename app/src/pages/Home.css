@@ -1,0 +1,157 @@
+.home {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  flex-direction: column;
+}
+
+.header {
+  height: calc(100vh - var(--navbar-height));
+}
+
+.header div {
+  position: absolute;
+  bottom: 3rem;
+  animation: bob 3s ease 4;
+  z-index: -1;
+}
+
+@keyframes bob {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(20%);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+.header img {
+  position: absolute;
+  z-index: -1;
+}
+
+.header img[alt='smoke'] {
+  top: 5rem;
+  left: 20rem;
+  transform: rotate(-20deg);
+  animation: shake ease 16s infinite;
+}
+
+.header img[alt='flash'] {
+  top: 20rem;
+  right: 18rem;
+  transform: rotate(20deg);
+  animation: shake ease 20s infinite;
+}
+
+.header img[alt='nade'] {
+  bottom: 5rem;
+  left: 15rem;
+  animation: shake ease 15s infinite;
+}
+
+@keyframes shake {
+  0% {
+    transform: translate(1px, 1px) rotate(0deg);
+  }
+  10% {
+    transform: translate(-1px, -2px) rotate(-1deg);
+  }
+  20% {
+    transform: translate(-3px, 0px) rotate(1deg);
+  }
+  30% {
+    transform: translate(3px, 2px) rotate(0deg);
+  }
+  40% {
+    transform: translate(1px, -1px) rotate(1deg);
+  }
+  50% {
+    transform: translate(-1px, 2px) rotate(-1deg);
+  }
+  60% {
+    transform: translate(-3px, 1px) rotate(0deg);
+  }
+  70% {
+    transform: translate(3px, 1px) rotate(-1deg);
+  }
+  80% {
+    transform: translate(-1px, -1px) rotate(1deg);
+  }
+  90% {
+    transform: translate(1px, 2px) rotate(0deg);
+  }
+  100% {
+    transform: translate(1px, 1px) rotate(0deg);
+  }
+}
+
+.header * {
+  margin: 0.5rem;
+}
+
+.header h1,
+.maps h1,
+.maps figure figcaption {
+  font-size: 4rem;
+}
+
+.maps {
+  height: 100vh;
+}
+
+.header,
+.maps {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.maps ul {
+  list-style-type: none;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  padding: 0;
+  margin: 0;
+}
+
+.maps figure {
+  position: relative;
+}
+
+.maps figure img {
+  width: 25vw;
+  aspect-ratio: 1;
+  object-fit: cover;
+  transition: filter 0.5s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+.maps figure figcaption {
+  opacity: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  cursor: pointer;
+  transition: opacity 0.5s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+.maps figure a {
+  text-decoration: none;
+  color: white;
+}
+
+.maps figure:hover figcaption {
+  opacity: 1;
+}
+
+.maps figure:hover img {
+  filter: brightness(40%);
+}
