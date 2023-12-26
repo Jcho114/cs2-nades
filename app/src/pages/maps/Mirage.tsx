@@ -2,6 +2,7 @@ import Map from "./Map.tsx";
 
 const MAPPING = {
   "market-door": [42,-117.5],
+  "market-window": [42,-60.5],
   "apartments": [74,25],
   "triple": [-65,0],
   "window": [17,-37],

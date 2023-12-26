@@ -3,10 +3,14 @@ const port = process.env.PORT || 4000
 
 const express = require('express')
 const app = express()
+
+const cors = require("cors");
+app.use(cors());
 app.use(express.json());
 
-const cors = require("cors")
-app.use(cors());
+const bodyParser = require("body-parser")
+app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.json())
 
 app.use('/', require("./routes/router"));
 

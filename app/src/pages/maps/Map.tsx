@@ -23,22 +23,27 @@ const ICONS = {
 function MiniMap({ map, mapping, markers }: {map: string, mapping: { [key: string]: number[] }, markers: { map: string; destination: string; type: string; embed: string; }[]}) {
   function renderMarkers() {
     let counter = 0, positions;
-    return markers.map((el: { map: string; destination: string; type: string; embed: string; }) => {
-      positions = mapping[el.destination as keyof typeof mapping];
-      return (
-        <Marker key={counter++} position={[positions[0], positions[1]]} icon={ICONS[el.type as keyof typeof ICONS]}>
-        <Popup className="popup">
-          <iframe
-            src={`https://www.youtube.com/embed/${el.embed}`}
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen
-            title="Embedded youtube"
-          />
-        </Popup>
-      </Marker>
-      )
-    }
-    )
+    return markers.map(
+      (el: { map: string; destination: string; type: string; embed: string; }) => {
+        positions = mapping[el.destination as keyof typeof mapping];
+        return (
+          <Marker
+            key={counter++}
+            position={[positions[0], positions[1]]}
+            icon={ICONS[el.type as keyof typeof ICONS]}
+          >
+            <Popup className="popup">
+              <iframe
+                src={`https://www.youtube.com/embed/${el.embed}`}
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+                title="Embedded youtube"
+              />
+            </Popup>
+          </Marker>
+        );
+      }
+    );
   }
   return (
     <>

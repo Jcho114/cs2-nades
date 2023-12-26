@@ -1,8 +1,5 @@
-let express = require('express')
-let router = express.Router()
-
-const cors = require("cors");
-router.use(cors());
+let express = require('express');
+let router = express.Router();
 
 let connect = require("../db/conn");
 
@@ -15,6 +12,14 @@ router.get('/nades', async (req, res) => {
     .limit(50)
     .toArray();
   res.json(nades).status(200);
+})
+
+router.post('/add', async (req, res) => {
+  let db = await connect();
+  let collection = db.collection("nades");
+  console.log(req.body);
+  collection.insertOne(req.body);
+  res.status(200).json(req.body);
 })
 
 module.exports = router;
