@@ -1,4 +1,4 @@
-.mirage {
+.map {
   margin-top: calc(var(--navbar-height) - 5rem);
   display: flex;
   justify-content: center;
@@ -41,7 +41,7 @@ iframe {
   border: none;
 }
 
-.map {
+.minimap {
   height: 55rem;
   width: 55rem;
 }

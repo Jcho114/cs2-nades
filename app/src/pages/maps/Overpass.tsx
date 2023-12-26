@@ -21,7 +21,7 @@ const MAPPING = {
 function Mirage() {
   return (
     <div>
-      <Map map="mirage" mapping={MAPPING} />
+      <Map map="overpass" mapping={MAPPING} />
     </div>
   )
 }
