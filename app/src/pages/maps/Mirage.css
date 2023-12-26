@@ -3,14 +3,45 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  height: 102vh;
+}
+
+.filters {
+  height: 100%;
+  width: 10rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.nade-filters {
+}
+
+.nade-filters img {
+  width: 7.5rem;
+  height: auto;
+  transition: cubic-bezier(0.075, 0.82, 0.165, 1) 1s;
+}
+
+.nade-filters img:hover {
+  width: 8rem;
+}
+
+.popup {
+  width: fit-content;
+  height: fit-content;
+  border-radius: 0;
+}
+
+iframe {
+  width: 10rem;
+  height: auto;
+  aspect-ratio: 16/9;
+  border: none;
 }
 
 .map {
   height: 55rem;
   width: 55rem;
-}
-
-.mirage img {
-  width: 50rem;
-  height: 50rem;
 }
