@@ -6,6 +6,11 @@
   align-items: center;
 }
 
+.add h1 {
+  margin: 0;
+  text-decoration: underline;
+}
+
 .add-form {
   width: 50%;
   height: 50%;
@@ -16,9 +21,20 @@
   gap: 1rem;
 }
 
+.form-maps-types {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+}
+
 .form-choices {
   display: flex;
   gap: 0.75rem;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
 }
 
 .form-choice {
@@ -30,4 +46,21 @@
 
 .form-chosen {
   background-color: rgb(235, 235, 235);
+}
+
+.add-form input[type="text"] {
+  margin: 1rem 0;
+  padding: 5px 10px;
+  border: 2px solid black;
+  border-radius: 5px;
+  font-size: 1rem;
+  width: 50%;
+}
+
+.add-form input[type="submit"] {
+  padding: 5px 10px;
+  border: 2px solid black;
+  border-radius: 5px;
+  font-size: 1rem;
+  width: fit-content;
 }
