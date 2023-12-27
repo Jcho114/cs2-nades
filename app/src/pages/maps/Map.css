@@ -70,9 +70,19 @@ iframe {
   width: 100vw;
   height: 100vh;
   z-index: 10000;
-  background-color: rgba(0, 0, 0, 0.5);
   display: flex;
   justify-content: center;
+}
+
+.map-bucket-empty {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 100vw;
+  height: 100vh;
+  z-index: 999;
+  background-color: rgba(0, 0, 0, 0.5);
 }
 
 .bucket-nav {
@@ -83,6 +93,7 @@ iframe {
   display: flex;
   justify-content: right;
   align-items: center;
+  z-index: inherit;
 }
 
 .bucket {
@@ -95,6 +106,7 @@ iframe {
   border-bottom-left-radius: 15px;
   border-bottom-right-radius: 15px;
   padding: 1rem;
+  z-index: inherit;
 }
 
 .nade-vid {
@@ -113,6 +125,7 @@ iframe {
   border: none;
   cursor: pointer;
   transition: all cubic-bezier(0.075, 0.82, 0.165, 1) 1s;
+  z-index: inherit;
 }
 
 #bucket-exit img {

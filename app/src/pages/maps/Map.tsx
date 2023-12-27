@@ -135,7 +135,6 @@ function MiniMap({ map, mapping }: { map: string; mapping: { [key: string]: numb
     const renders = Object.entries(buckets.current).map(
       ([, nades]: [string, Nade[]]) => renderMarker(nades, counter++, ICONS[nades[0].type as keyof typeof ICONS])
     );
-    console.log(state, destination);
     if (state) {
       const positions = mapping[ destination
         ];
@@ -172,6 +171,7 @@ function MiniMap({ map, mapping }: { map: string; mapping: { [key: string]: numb
           <div className="bucket">
             {renderBucket(nades)}
           </div>
+          <div className="map-bucket-empty" onClick={() => {setInfo(false); setNades([])}}></div>
         </div>
       ) : (
         <></>
