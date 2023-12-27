@@ -18,6 +18,10 @@ const ICONS = {
     iconUrl: "../../../assets/csgo_nade.webp",
     iconSize: [85, 60]
   }),
+  "molotov": new Leaflet.Icon({
+    iconUrl: "../../../assets/csgo_molotov.webp",
+    iconSize: [85, 60]
+  }),
   "smokex": new Leaflet.Icon({
     iconUrl: "../../../assets/csgo_smokex.png",
     iconSize: [70, 50]
@@ -28,6 +32,10 @@ const ICONS = {
   }),
   "nadex": new Leaflet.Icon({
     iconUrl: "../../../assets/csgo_nadex.png",
+    iconSize: [85, 60]
+  }),
+  "molotovx": new Leaflet.Icon({
+    iconUrl: "../../../assets/csgo_molotovx.png",
     iconSize: [85, 60]
   })
 }
@@ -192,6 +200,11 @@ function MiniMap({ map, mapping }: { map: string; mapping: { [key: string]: numb
             src="../../../assets/csgo_smoke.webp"
             alt="smoke"
             onClick={() => setType("smoke")}
+          />
+          <img
+            src="../../../assets/csgo_molotov.webp"
+            alt="molotov"
+            onClick={() => setType("molotov")}
           />
         </div>
       </div>

@@ -8,7 +8,7 @@ const MAPPING = {
   "window": [17,-37],
   "a-ramp": [-45,73],
   "jungle": [-47,0],
-  "palace": [-67,51],
+  "palace": [-70,70],
   "market": [23,-94],
   "connector": [0,0],
   "mid-boxes": [14,78],
