@@ -210,7 +210,7 @@ function MiniMap({ map, mapping }: { map: string; mapping: { [key: string]: numb
         dragging={false}
       >
         <TileLayer
-          attribution="&copy; Valve"
+          attribution=""
           url={`../../../${map}/{z}/{x}/{y}.png`}
         />
         {renderMarkers()}
