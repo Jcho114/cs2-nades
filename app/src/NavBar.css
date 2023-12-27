@@ -12,3 +12,11 @@
   font-size: 1.4rem;
   text-decoration: none;
 }
+
+.navbar-link {
+  transition: transform 1s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+.navbar-link:hover {
+  transform: scale(120%);
+}

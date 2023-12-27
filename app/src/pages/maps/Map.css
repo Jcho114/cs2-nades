@@ -42,3 +42,13 @@ iframe {
   height: 55rem;
   width: 55rem;
 }
+
+.map-return {
+  text-align: center;
+  padding: 5px 10px;
+  border: 2px solid black;
+  background-color: black;
+  color: white;
+  border-radius: 5px;
+  font-size: 15px;
+}

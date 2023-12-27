@@ -15,7 +15,7 @@ function Add() {
 
   const MIRAGE = [
     "market-door",
-    "market_window",
+    "market-window",
     "apartments",
     "triple",
     "window",

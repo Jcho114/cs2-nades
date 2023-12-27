@@ -1,108 +1,134 @@
 import { MapContainer, TileLayer } from "react-leaflet";
 import { Marker, Popup } from "react-leaflet";
-import { Icon } from "leaflet";
+import Leaflet from "leaflet";
 import React from "react";
 import "leaflet/dist/leaflet.css";
 import "./Map.css";
 
 const ICONS = {
-  "smoke": new Icon({
+  "smoke": new Leaflet.Icon({
     iconUrl: "../../../assets/csgo_smoke.webp",
     iconSize: [70, 50]
   }),
-  "flash": new Icon({
+  "flash": new Leaflet.Icon({
     iconUrl: "../../../assets/csgo_flash.webp",
     iconSize: [65, 45]
   }),
-  "nade": new Icon({
+  "nade": new Leaflet.Icon({
     iconUrl: "../../../assets/csgo_nade.webp",
     iconSize: [85, 60]
   })
 }
 
-function MiniMap({ map, mapping, markers }: {map: string, mapping: { [key: string]: number[] }, markers: { map: string; destination: string; type: string; embed: string; }[]}) {
+// disable double clicking zoom
+function MiniMap({ map, mapping }: {
+  map: string;
+  mapping: { [key: string]: number[] };
+}) {
+  const [state, flipState] = React.useState<boolean>(false);
+  const [destination, setDestination] = React.useState<string>("");
+  const [type, setType] = React.useState<string>("smoke");
+  const [markers, setMarkers] = React.useState([]);
+  const baseUrl: string = "http://localhost:1236";
+
   function renderMarkers() {
-    let counter = 0, positions;
-    return markers.map(
-      (el: { map: string; destination: string; type: string; embed: string; }) => {
-        positions = mapping[el.destination as keyof typeof mapping];
+    let counter = 0,
+      positions;
+    const list = state ? markers.filter((el: { destination: string }) => el.destination === destination) : markers;
+    return list.map(
+      (el: {
+        map: string;
+        location: string;
+        destination: string;
+        type: string;
+        embed: string;
+      }) => {
+        positions = mapping[state ? el.location as keyof typeof mapping : el.destination as keyof typeof mapping];
         return (
           <Marker
             key={counter++}
             position={[positions[0], positions[1]]}
-            icon={ICONS[el.type as keyof typeof ICONS]}
+            icon={!state ? ICONS[el.type as keyof typeof ICONS] : new Leaflet.Icon.Default()}
+            eventHandlers={{
+              click: () => {
+                if (!state) {
+                  setDestination(el.destination);
+                  flipState(!state);
+                }
+              }
+            }}
           >
-            <Popup className="popup">
-              <iframe
-                src={`https://www.youtube.com/embed/${el.embed}`}
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-                title="Embedded youtube"
-              />
-            </Popup>
+            {
+              state ?
+                (
+                  <Popup className="popup">
+                    <iframe
+                      src={`https://www.youtube.com/embed/${el.embed}`}
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                      title="Embedded youtube"
+                    />
+                  </Popup>
+                ) : <></>
+            }
           </Marker>
         );
       }
     );
   }
+
+  React.useEffect(() => {
+    async function fetchData() {
+      const data = await fetch(`${baseUrl}/nades?map=${map}&type=${type}`).then(res => res.json());
+      setMarkers(data);
+    }
+    fetchData();
+    flipState(false);
+  }, [type, map]);
+
+  const corner1 = Leaflet.latLng(-90, -170)
+  const corner2 = Leaflet.latLng(90, 170)
+  const bounds = Leaflet.latLngBounds(corner1, corner2)
+  
   return (
-    <>
+    <div className="map">
+      <div className="filters">
+        <div className="nade-filters">
+          <img src="../../../assets/csgo_flash.webp" alt="flash" onClick={() => setType("flash")} />
+          <img src="../../../assets/csgo_nade.webp" alt="nade" onClick={() => setType("nade")} />
+          <img src="../../../assets/csgo_smoke.webp" alt="smoke" onClick={() => setType("smoke")} />
+        </div>
+      </div>
       <MapContainer
         className="minimap"
         center={[0, 0]}
-        zoom={1.5}
+        zoom={1.78}
+        zoomSnap={0.15}
         scrollWheelZoom={false}
         zoomControl={false}
+        touchZoom={false}
+        doubleClickZoom={false}
+        maxBounds={bounds}
+        boundsOptions={{padding: [50, 50]}}
+        maxBoundsViscosity={1.0}
         dragging={false}
       >
         <TileLayer
-          attribution='&copy; Valve'
+          attribution="&copy; Valve"
           url={`../../../${map}/{z}/{x}/{y}.png`}
         />
         {renderMarkers()}
       </MapContainer>
-    </>
+      {state ? <div className="map-return" onClick={() => flipState(!state)}>
+          Return
+      </div> : <></>}
+    </div>
   );
 }
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-function Filters({ setType }: any) {
-  return (
-    <div className="filters">
-      <div className="nade-filters">
-        <img src="../../../assets/csgo_flash.webp" alt="flash" onClick={() => setType("flash")} />
-        <img src="../../../assets/csgo_nade.webp" alt="nade" onClick={() => setType("nade")} />
-        <img src="../../../assets/csgo_smoke.webp" alt="smoke" onClick={() => setType("smoke")} />
-      </div>
-    </div>
-  )
-}
-
-// Add it so that you store each coordinate as a list then use some sort of mini carousel
-// current thought process is this (getting a little technical since I thought you might like to hear it)
-// going to store destinations by name, but locations by coordinates
-// when I click a destination, I will then get to see the locations, and choose one of those locations to get an embedded video
-// this will help with duplicate nades without cluttering too much
 function Map({ map, mapping }: {map: string, mapping: { [key: string]: number[] }}) {
-  const [type, setType] = React.useState<string>("smoke");
-  const [markers, setMarkers] = React.useState([]);
-  const baseUrl: string = "http://localhost:1236";
-
-  React.useEffect(() => {
-    console.log(type);
-    async function fetchData() {
-      const data = await fetch(`${baseUrl}/nades?map=${map}&type=${type}`).then(res => res.json());
-      console.log(data);
-      setMarkers(data);
-    }
-    fetchData();
-  }, [type, map]);
-
   return (
-    <div className="map">
-      <Filters setType={setType} />
-      <MiniMap map={map} mapping={mapping} markers={markers} />
-    </div>
+    <MiniMap map={map} mapping={mapping} />
   );
 }
 

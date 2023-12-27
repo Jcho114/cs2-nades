@@ -42,6 +42,11 @@
   border-radius: 5px;
   padding: 0.25rem 0.5rem;
   cursor: pointer;
+  transition: all cubic-bezier(0.075, 0.82, 0.165, 1) 1s;
+}
+
+.form-choice:hover {
+  background-color: rgb(235, 235, 235);
 }
 
 .form-chosen {
