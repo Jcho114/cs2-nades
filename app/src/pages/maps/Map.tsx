@@ -70,10 +70,10 @@ function MiniMap({ map, mapping }: { map: string; mapping: { [key: string]: numb
   function createBuckets() {
     const list = state ? markers.filter((el: { destination: string }) => el.destination === destination) : markers;
     buckets.current = list.reduce((acc: { [key: string]: Nade[] }, curr: Nade) => {
-      if (!(curr.destination in acc)) {
-        acc[curr.destination] = [];
+      if (!((state ? curr.location : curr.destination) in acc)) {
+        acc[state ? curr.location : curr.destination] = [];
       }
-      acc[curr.destination].push(curr);
+      acc[state ? curr.location : curr.destination].push(curr);
       return acc;
     }, {});
   }
