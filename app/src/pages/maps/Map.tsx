@@ -17,6 +17,18 @@ const ICONS = {
   "nade": new Leaflet.Icon({
     iconUrl: "../../../assets/csgo_nade.webp",
     iconSize: [85, 60]
+  }),
+  "smokex": new Leaflet.Icon({
+    iconUrl: "../../../assets/csgo_smokex.png",
+    iconSize: [70, 50]
+  }),
+  "flashx": new Leaflet.Icon({
+    iconUrl: "../../../assets/csgo_flashx.png",
+    iconSize: [65, 45]
+  }),
+  "nadex": new Leaflet.Icon({
+    iconUrl: "../../../assets/csgo_nadex.png",
+    iconSize: [85, 60]
   })
 }
 
@@ -32,7 +44,7 @@ function MiniMap({ map, mapping }: { map: string; mapping: { [key: string]: numb
   const [state, flipState] = React.useState<boolean>(false);
   const [destination, setDestination] = React.useState<string>("");
   const [type, setType] = React.useState<string>("smoke");
-  const [markers, setMarkers] = React.useState([]);
+  const [markers, setMarkers] = React.useState<Nade[]>([]);
   const [showInfo, setInfo] = React.useState<boolean>(false);
   const [nades, setNades] = React.useState<Nade[]>([]);
   const buckets = React.useRef<{ [key: string]: Nade[] }>({});
@@ -63,18 +75,18 @@ function MiniMap({ map, mapping }: { map: string; mapping: { [key: string]: numb
     const re = /^.*\?/;
     return play ? (
       <iframe
+        key={keynum}
         src={`https://www.youtube.com/embed/${embed}?mute=1&showinfo=0?rel=0&modestbranding=1&autohide=1&autoplay=1`}
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
         allowFullScreen
         title="Embedded youtube"
         className="nade-vid"
         onMouseLeave={() => setPlay(false)}
-        key={keynum}
       />
     ) : (
       <img
-        className="nade-vid"
         key={keynum}
+        className="nade-vid"
         onMouseOver={() => setPlay(true)}
         src={`https://img.youtube.com/vi/${embed.match(re)?.toString().slice(0, -1)}/maxresdefault.jpg`}
       />
@@ -85,7 +97,7 @@ function MiniMap({ map, mapping }: { map: string; mapping: { [key: string]: numb
     let counter = 0;
     const bucket = nades.map((el: Nade) => {
       return state ? (
-        <Video keynum={counter++} embed={el.embed} />
+        <Video key={counter++} keynum={counter++} embed={el.embed} />
       ) : (
         <div key={counter++}></div>
       );
@@ -93,35 +105,55 @@ function MiniMap({ map, mapping }: { map: string; mapping: { [key: string]: numb
     return bucket;
   }
 
+  function renderMarker(nades: Nade[], counter: number, icon: Leaflet.Icon) {
+    const positions = mapping[state ? nades[0].location as keyof typeof mapping : nades[0].destination as keyof typeof mapping];
+    return (
+      <div key={counter++}>
+         <Marker
+          position={[positions[0], positions[1]]}
+          icon={icon}
+          eventHandlers={{
+            click: () => {
+              if (!state) {
+                setDestination(nades[0].destination);
+                flipState(!state);
+              } else {
+                setNades(nades);
+                setInfo(true);
+              }
+            }
+          }}
+        >
+        </Marker>
+      </div>
+    )
+  }
+
   function renderMarkers() {
-    let counter = 0,
-      positions;
+    let counter = 0;
     createBuckets();
-    return Object.entries(buckets.current).map(
-      ([, nades]: [string, Nade[]]) => {
-        positions = mapping[state ? nades[0].location as keyof typeof mapping : nades[0].destination as keyof typeof mapping];
-        return (
+    const renders = Object.entries(buckets.current).map(
+      ([, nades]: [string, Nade[]]) => renderMarker(nades, counter++, ICONS[nades[0].type as keyof typeof ICONS])
+    );
+    console.log(state, destination);
+    if (state) {
+      const positions = mapping[ destination
+        ];
+        renders.push(
           <div key={counter++}>
-             <Marker
+            <Marker
               position={[positions[0], positions[1]]}
-              icon={!state ? ICONS[nades[0].type as keyof typeof ICONS] : new Leaflet.Icon.Default()}
+              icon={ICONS[type + "x" as keyof typeof ICONS]}
               eventHandlers={{
                 click: () => {
-                  if (!state) {
-                    setDestination(nades[0].destination);
-                    flipState(!state);
-                  } else {
-                    setNades(nades);
-                    setInfo(true);
-                  }
-                }
+                  flipState(!state);
+                },
               }}
-            >
-            </Marker>
+            ></Marker>
           </div>
-        )
+        );
       }
-    );
+    return renders;
   }
 
   const corner1 = Leaflet.latLng(-90, -170)
@@ -183,13 +215,6 @@ function MiniMap({ map, mapping }: { map: string; mapping: { [key: string]: numb
         />
         {renderMarkers()}
       </MapContainer>
-      {state ? (
-        <div className="map-return" onClick={() => flipState(!state)}>
-          <img src="../../../icons/exit.png" alt="exit" />
-        </div>
-      ) : (
-        <></>
-      )}
     </div>
   );
 }

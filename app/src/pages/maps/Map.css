@@ -52,7 +52,7 @@ iframe {
 }
 
 .map-return img {
-  width: 3.5rem;
+  width: 3rem;
   height: 3rem;
   cursor: pointer;
   transition: transform cubic-bezier(0.075, 0.82, 0.165, 1) 1s;
