@@ -1,5 +1,18 @@
 import React from 'react';
 import './Add.css';
+import { MIRAGE_MAPPING, INFERNO_MAPPING, OVERPASS_MAPPING } from './pages/maps/mapping';
+
+const MIRAGE = Object.entries(MIRAGE_MAPPING).map((([location,]) => location)).sort();
+const INFERNO = Object.entries(INFERNO_MAPPING).map((([location,]) => location)).sort();
+const OVERPASS = Object.entries(OVERPASS_MAPPING).map((([location,]) => location)).sort();
+const baseUrl: string = "http://localhost:1236";
+const MAPS = ["mirage", "inferno", "overpass"];
+const TYPES = ["smoke", "nade", "molotov", "flash"];
+const MAP_CALLOUTS = {
+  "mirage": MIRAGE,
+  "inferno": INFERNO,
+  "overpass": OVERPASS
+}
 
 function Add() {
   const [map, setMap] = React.useState<number>(0);
@@ -7,42 +20,6 @@ function Add() {
   const [type, setType] = React.useState<number>(0);
   const [embed, setEmbed] = React.useState<string>("");
   const [destination, setDestination] = React.useState<number>(0);
-
-  const baseUrl: string = "http://localhost:1236";
-
-  const MAPS = ["mirage", "inferno", "overpass"];
-  const TYPES = ["smoke", "nade", "molotov"];
-
-  const MIRAGE = [
-    "market-door",
-    "market-window",
-    "apartments",
-    "triple",
-    "window",
-    "a-ramp",
-    "jungle",
-    "palace",
-    "market",
-    "connector",
-    "mid-boxes",
-    "under-palace",
-    "top-mid",
-    "t-spawn",
-    "ct",
-    "t-ramp"
-  ];
-  const INFERNO = [
-    "ct"
-  ];
-  const OVERPASS = [
-    "bank"
-  ];
-
-  const MAP_CALLOUTS = {
-    "mirage": MIRAGE,
-    "inferno": INFERNO,
-    "overpass": OVERPASS
-  }
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   function handleSubmit(e: any) {

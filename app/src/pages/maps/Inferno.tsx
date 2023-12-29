@@ -1,7 +1,5 @@
 import Map from "./Map.tsx";
-
-const MAPPING = {
-}
+import { INFERNO_MAPPING as MAPPING } from "./mapping.tsx";
 
 function Mirage() {
   return (

@@ -1,7 +1,5 @@
 import Map from "./Map.tsx";
-
-const MAPPING = {
-}
+import { OVERPASS_MAPPING as MAPPING } from "./mapping.tsx";
 
 function Mirage() {
   return (
