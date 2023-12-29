@@ -9,6 +9,9 @@
 #### CS2 Nades showcases nades for community favorites Mirage, Inferno, and Overpass through an interactive map.
 #### <img src="./app/public/README/mirage.png" />
 
+# Status
+#### CS2 Nades will be deployed with Vercel in the coming weeks, since there are a few things I have to tweak.
+
 # Usage
 #### *ADDING LATER*
 
