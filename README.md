@@ -4,14 +4,13 @@
 <span></span>
 
 # CS2 Nades
-#### CS2 Nades is an interactive database of 100+ nades for Valve's first person shooter <a href="https://www.counter-strike.net/cs2">Counter-Strike 2</a>.
+#### CS2 Nades is an interactive database of (soon to be) 100+ nades for Valve's first person shooter <a href="https://www.counter-strike.net/cs2">Counter-Strike 2</a>.
 #### It is a personal project sparked by a curiosity of how <a href="https://www.csgonades.com/">CSNades</a> is implemented.
 #### CS2 Nades showcases nades for community favorites Mirage, Inferno, and Overpass through an interactive map.
 #### <img src="./app/public/README/mirage.png" />
-#### CS2 Nades...
 
 # Usage
-#### ADD GIF LATER
+#### *ADDING LATER*
 
 # Tech Stack
 #### <img src="https://miro.medium.com/v2/resize:fit:678/1*l2tlJsFNg2tH6QizegKkqA.png" />
