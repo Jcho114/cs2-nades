@@ -1,10 +1,10 @@
-let express = require('express');
-let router = express.Router();
+const express = require('express');
+const router = express.Router();
 
 const {
   getNades,
   addNade
-} = require("./controllers.js");
+} = require("../controllers/nades.controller");
 
 router.get('/nades', getNades);
 

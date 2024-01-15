@@ -12,8 +12,10 @@ const bodyParser = require("body-parser");
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-app.use('/', require("./routes/nades/router.js"));
+app.use('/', require("./src/routes/nades.route.js"));
 
-app.listen(port, () => {
+const server = app.listen(port, () => {
   console.log(`Server listening on port ${port}`)
 });
+
+module.exports = server;

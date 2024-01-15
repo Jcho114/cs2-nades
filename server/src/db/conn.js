@@ -1,10 +1,8 @@
 const { MongoClient } = require("mongodb");
-
 const uri = process.env.ATLAS_URI;
-
 const client = new MongoClient(uri);
 
-async function run() {
+async function connect() {
   try {
     let conn = await client.connect();
     console.log("Connection to MongoDB database established");
@@ -16,4 +14,7 @@ async function run() {
   }
 }
 
-module.exports = run
+module.exports = {
+  client,
+  connect
+}
