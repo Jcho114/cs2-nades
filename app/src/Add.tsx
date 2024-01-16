@@ -5,7 +5,7 @@ import { MIRAGE_MAPPING, INFERNO_MAPPING, OVERPASS_MAPPING } from './pages/maps/
 const MIRAGE = Object.entries(MIRAGE_MAPPING).map((([location,]) => location)).sort();
 const INFERNO = Object.entries(INFERNO_MAPPING).map((([location,]) => location)).sort();
 const OVERPASS = Object.entries(OVERPASS_MAPPING).map((([location,]) => location)).sort();
-const baseUrl: string = "http://localhost:1236";
+const baseUrl: string = "http://localhost:3001";
 const MAPS = ["mirage", "inferno", "overpass"];
 const TYPES = ["smoke", "nade", "molotov", "flash"];
 const MAP_CALLOUTS = {

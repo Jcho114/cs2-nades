@@ -14,8 +14,15 @@ app.use(bodyParser.json());
 
 app.use('/', require("./src/routes/nades.route.js"));
 
+app.use((error, res, req, next) => {
+  console.error(error.message);
+  res.status(500).json({
+    "message": "error",
+  });
+});
+
 const server = app.listen(port, () => {
-  console.log(`Server listening on port ${port}`)
+  console.log(`Server listening on port ${port}`);
 });
 
 module.exports = server;

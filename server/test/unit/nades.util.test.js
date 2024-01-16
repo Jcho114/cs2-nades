@@ -1,7 +1,6 @@
 const server = require("../../server");
 const request = require("supertest");
-const { client } = require("../../src/db/conn");
-const db = client;
+const mongoose = require("mongoose");
 
 beforeEach(() => {
     console.log("before each test");
@@ -14,7 +13,7 @@ afterEach(() => {
 afterAll(done => {
     console.log("tests done");
     server.close();
-    db.close();
+    mongoose.disconnect();
     done();
 });
 

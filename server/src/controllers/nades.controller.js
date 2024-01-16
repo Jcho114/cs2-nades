@@ -1,7 +1,7 @@
 const {
   dbGetNades,
   dbAddNade
-} = require("../db/nades.db");
+} = require("../collections/nades.collection");
 
 const getNades = async (req, res) => {
   const query = req.query;
