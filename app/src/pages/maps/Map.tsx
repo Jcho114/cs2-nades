@@ -56,7 +56,7 @@ function MiniMap({ map, mapping }: { map: string; mapping: { [key: string]: numb
   const [showInfo, setInfo] = React.useState<boolean>(false);
   const [nades, setNades] = React.useState<Nade[]>([]);
   const buckets = React.useRef<{ [key: string]: Nade[] }>({});
-  const baseUrl: string = "http://localhost:1236";
+  const baseUrl: string = "http://localhost:3001";
 
   React.useEffect(() => {
     async function fetchData() {
