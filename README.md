@@ -31,5 +31,5 @@
 - <a href="https://vitejs.dev/">ViteJS</a>
 
 # Future Updates
-#### As of January I have no intention of updating the website since <a href="https://www.csgonades.com/">CSNades</a> already exists.
+#### As of January I have no intention of updating the website beyond small fixes and hosting since <a href="https://www.csgonades.com/">CSNades</a> already exists.
 #### I was simply interested in how to implement such a project and to learn, goals that I feel I have successfully accomplished.
